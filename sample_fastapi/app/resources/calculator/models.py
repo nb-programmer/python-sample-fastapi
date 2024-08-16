@@ -1,9 +1,11 @@
 from pydantic import BaseModel
 
 
-class ConversioHexResponse(BaseModel):
+class ConversionHexResponse(BaseModel):
+    """Hexadecimal value response"""
     value: str
 
 
-class ConversioDecResponse(BaseModel):
+class ConversionDecResponse(BaseModel):
+    """Integer value response"""
     value: int

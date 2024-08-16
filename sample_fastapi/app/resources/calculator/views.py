@@ -1,18 +1,20 @@
 from fastapi import Depends, HTTPException, status
 
-from .models import ConversioDecResponse, ConversioHexResponse
+from .models import ConversionDecResponse, ConversionHexResponse
 from .services import ConverterService
 
 
-async def calc_dec2hex(value: int, converter: ConverterService = Depends(ConverterService)) -> ConversioHexResponse:
-    return ConversioHexResponse(
+async def conv_dec2hex(value: int, converter: ConverterService = Depends(ConverterService)) -> ConversionHexResponse:
+    """Convert integer input into hexadecimal string"""
+    return ConversionHexResponse(
         value=converter.dec2hex(value),
     )
 
 
-async def calc_hex2dec(value: str, converter: ConverterService = Depends(ConverterService)) -> ConversioDecResponse:
+async def conv_hex2dec(value: str, converter: ConverterService = Depends(ConverterService)) -> ConversionDecResponse:
+    """Convert hexadecimal string input into integer"""
     try:
-        return ConversioDecResponse(
+        return ConversionDecResponse(
             value=converter.hex2dec(value),
         )
     except ValueError:
