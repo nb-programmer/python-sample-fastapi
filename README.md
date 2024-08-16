@@ -38,7 +38,7 @@ cp .env.example .env
 # Open the new .env file in your favourite editor and make the changes
 ```
 
-5. Run the dev server using `F5` key in VSCode.You can also run the server script:
+5. Run the dev server using `F5` key in VSCode. You can also run the server script:
 ```shell
 sample-fastapi --help
 ```
