@@ -1,0 +1,22 @@
+# Development service docker compose script
+
+services:
+  sample_fastapi:
+    image: sample-fastapi:latest
+    build:
+      context: .
+
+    command:
+      # Run uvicorn with these extra args
+      - "--host=0.0.0.0"
+      - "--port=8000"
+      - "--timeout-graceful-shutdown=10"
+      - "--log-level=info"
+      - "--log-config=/config/log-config.conf"
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - "./config/:/home/appuser/config"
+      - "./logs/:/home/appuser/logs"

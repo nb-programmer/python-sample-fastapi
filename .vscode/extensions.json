@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-python.black-formatter",
+        "editorconfig.editorconfig",
+        "ms-python.isort",
+        "ms-python.python",
+        "gruntfuggly.todo-tree",
+        "ms-python.debugpy"
+    ]
+}

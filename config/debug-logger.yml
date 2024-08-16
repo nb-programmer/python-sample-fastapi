@@ -1,0 +1,153 @@
+version: 1
+disable_existing_loggers: True
+
+__anchors__:
+  - &date_format "%Y-%m-%d %H:%M:%S"
+
+__files__:
+  - &root_log_file "dev/root.log"
+  - &app_log_file "dev/sample-fastapi.log"
+  - &uvicorn_error_log_file "dev/sample-fastapi.error.log"
+  - &uvicorn_access_log_file "dev/sample-fastapi.access.log"
+
+# Logging formatters
+formatters:
+  # Generic formatter
+  generic_console_fmt:
+    (): 'uvicorn.logging.DefaultFormatter'
+    fmt: '%(levelprefix)-9s [%(name)s] (%(filename)s:%(lineno)d) %(message)s'
+    datefmt: *date_format
+
+  generic_file_fmt:
+    format: '%(levelname)-9s %(asctime)s - [%(name)s] (%(filename)s:%(lineno)d) %(message)s'
+    datefmt: *date_format
+
+  # Uvicorn console formatters
+  uvicorn_error_console_fmt:
+    (): 'uvicorn.logging.DefaultFormatter'
+    fmt: '%(levelprefix)-9s [Uvicorn] %(message)s'
+
+  uvicorn_access_console_fmt:
+    (): 'uvicorn.logging.AccessFormatter'
+    fmt: '%(levelprefix)-9s [Uvicorn/Access] %(client_addr)s - "%(request_line)s" %(status_code)s'
+
+  # Uvicorn log file formatters
+  uvicorn_error_file_fmt:
+    format: '%(levelname)-9s %(asctime)s - [Uvicorn] %(message)s'
+    datefmt: *date_format
+
+  uvicorn_access_file_fmt:
+    (): 'uvicorn.logging.AccessFormatter'
+    fmt: '%(levelname)-9s %(asctime)s - [Uvicorn/Access] %(client_addr)s - "%(request_line)s" %(status_code)s'
+    datefmt: *date_format
+    use_colors: false
+
+
+handlers:
+  # Root logger
+  global_console:
+    class: logging.StreamHandler
+    formatter: generic_console_fmt
+
+  global_rotating_file:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: INFO
+    formatter: generic_file_fmt
+
+    # Arguments
+    filename: *root_log_file
+    when: midnight
+    interval: 1
+    backupCount: 6
+    encoding: utf-8
+    delay: true
+
+  sample_fastapi_rotating_file:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: INFO
+    formatter: generic_file_fmt
+
+    # Arguments
+    filename: *app_log_file
+    when: midnight
+    interval: 1
+    backupCount: 6
+    encoding: utf-8
+    delay: true
+
+  uvicorn_error_console:
+    class: logging.StreamHandler
+    formatter: uvicorn_error_console_fmt
+
+    # Arguments
+    stream: ext://sys.stderr
+
+  uvicorn_access_console:
+    class: logging.StreamHandler
+    formatter: uvicorn_access_console_fmt
+
+    # Arguments
+    stream: ext://sys.stdout
+
+  uvicorn_error_file:
+    class: logging.handlers.TimedRotatingFileHandler
+    formatter: uvicorn_error_file_fmt
+
+    # Arguments
+    filename: *uvicorn_error_log_file
+    when: midnight
+    interval: 1
+    backupCount: 6
+    encoding: utf-8
+    delay: true
+
+  uvicorn_access_file:
+    class: logging.handlers.TimedRotatingFileHandler
+    formatter: uvicorn_access_file_fmt
+
+    # Arguments
+    filename: *uvicorn_access_log_file
+    when: midnight
+    interval: 1
+    backupCount: 6
+    encoding: utf-8
+    delay: true
+
+
+# Configure root logger
+root:
+  level: INFO
+  handlers:
+    - global_console
+    - global_rotating_file
+
+
+# Configure loggers by name
+loggers:
+  # Our application package logger tree
+  sample_fastapi:
+    level: INFO
+    handlers:
+      - sample_fastapi_rotating_file
+
+  # Auto-reload messages get annoying, so set it to WARN level
+  watchfiles.main:
+    level: WARN
+
+  # Re-define Uvicorn loggers
+  uvicorn:
+    level: INFO
+
+  uvicorn.error:
+    level: INFO
+    propagate: False
+    handlers:
+      - uvicorn_error_console
+      - uvicorn_error_file
+
+  uvicorn.access:
+    level: INFO
+    propagate: False
+    handlers:
+      - uvicorn_access_console
+      - uvicorn_access_file
