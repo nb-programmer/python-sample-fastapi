@@ -1,5 +1,11 @@
 # Sample FastAPI application
 
+Sample FastAPI application.
+
+## Template
+
+Note that this is a template project. You will need to make changes to this application if you want to make use of it. Please read the [Template readme](TEMPLATE.md) file for more information on what this project does and how to use the template.
+
 ## Development setup
 
 1. (Optional) Install Pyenv and the Python version for this project:
