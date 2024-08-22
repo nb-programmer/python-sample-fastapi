@@ -53,7 +53,7 @@ cp .env.example .env
 bash ./scripts/dev-launch.sh
 ```
 
-6. You can also run the server (cli) script:
+6. You can also run the cli script:
 ```shell
 sample-fastapi --help
 ```
