@@ -44,7 +44,16 @@ cp .env.example .env
 # Open the new .env file in your favourite editor and make the changes
 ```
 
-5. Run the dev server using `F5` key in VSCode. You can also run the server script:
+5. Run the dev server using `F5` key in VSCode. You can also use the `dev-launch` shell script:
+```shell
+# Windows
+./scripts/dev-launch.bat
+
+# POSIX
+bash ./scripts/dev-launch.sh
+```
+
+6. You can also run the server (cli) script:
 ```shell
 sample-fastapi --help
 ```
