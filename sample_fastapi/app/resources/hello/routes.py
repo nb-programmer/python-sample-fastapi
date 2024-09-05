@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, FastAPI
 
 from .views import respond_hello, respond_name_greet
 
@@ -10,3 +10,7 @@ def init_routes():
     router.add_api_route("/greet", respond_name_greet, methods={"GET"})
 
     return router
+
+
+def init_app(app: FastAPI):
+    app.include_router(init_routes())

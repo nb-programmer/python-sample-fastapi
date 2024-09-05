@@ -27,5 +27,5 @@ async def app_lifespan_handler(app: FastAPI):
 
 def init_app():
     app = FastAPI(lifespan=app_lifespan_handler)
-    resources.init_routes(app)
+    resources.init_app(app)
     return app

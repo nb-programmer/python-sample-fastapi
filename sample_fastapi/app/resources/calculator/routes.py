@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, FastAPI
 
 from .views import conv_dec2hex, conv_hex2dec
 
@@ -10,3 +10,7 @@ def init_routes():
     router.add_api_route("/convert/hex2dec", conv_hex2dec, methods={"POST"})
 
     return router
+
+
+def init_app(app: FastAPI):
+    app.include_router(init_routes())
