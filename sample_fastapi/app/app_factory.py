@@ -5,7 +5,7 @@ from contextlib import AsyncExitStack, asynccontextmanager
 from fastapi import FastAPI
 from tqdm.contrib.logging import logging_redirect_tqdm
 
-from . import resources
+from . import middleware, resources
 
 LOG = logging.getLogger(__name__)
 
@@ -28,4 +28,6 @@ async def app_lifespan_handler(app: FastAPI):
 def init_app():
     app = FastAPI(lifespan=app_lifespan_handler)
     resources.init_app(app)
+    middleware.init_middleware(app)
+
     return app
