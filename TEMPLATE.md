@@ -5,6 +5,10 @@ The project is called `sample-fastapi` and the package is called `sample_fastapi
 
 If you want to use this template, you will need to rename the package name and project name occurrences to your project name. A good place to start is the `pyproject.toml` file.
 
+## How to use the template
+
+(TODO)
+
 ## Features
 
 This Application implements the following:
@@ -28,3 +32,7 @@ This Application implements the following:
 - Development setup script to quickly install all dependencies needed.
 - A `.env.example` configuration example that needs to be cloned into `.env`
 - Examples (Only Docker script for now)
+
+## Pending features to add to repo
+
+- Async database using SQLAlchemy ORM

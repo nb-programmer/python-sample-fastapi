@@ -8,7 +8,7 @@ Note that this is a template project. You will need to make changes to this appl
 
 ## Development setup
 
-1. (Optional) Install Pyenv and the Python version for this project:
+1. (Optional) Install Pyenv ([Linux](https://github.com/pyenv/pyenv), [Windows](https://github.com/pyenv-win/pyenv-win)) and the [Python installation](.python-version) needed for this project:
 ```shell
 pyenv install
 ```

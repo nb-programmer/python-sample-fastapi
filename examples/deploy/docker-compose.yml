@@ -1,0 +1,17 @@
+services:
+  server:
+    image: ghcr.io/nb-programmer/sample-fastapi:latest
+
+    command:
+      - "--host=0.0.0.0"
+      - "--port=8000"
+      - "--timeout-graceful-shutdown=10"
+      - "--log-config=config/server-logger-config.yml"
+
+    volumes:
+      - ./config:/app/config:ro
+      - ./data/logs/server:/app/logs
+      - ./data/cache:/root/.cache
+
+    ports:
+      - 8000:8000
