@@ -5,9 +5,6 @@
 echo Creating "dev" folder...
 mkdir "dev/"
 
-echo Installing poetry...
-python3 -m pip install -q poetry
-
 echo Installing requirements (all with dev)...
 poetry -q install --with dev,test
 

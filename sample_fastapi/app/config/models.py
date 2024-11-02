@@ -20,7 +20,7 @@ class BaseAppSettings(BaseSettings):
 
 class AppSettings(BaseAppSettings):
     """Main application-specific settings"""
-    app_base_url: AnyUrl = "http://localhost:8000"
+    app_base_url: AnyUrl = Field(default=AnyUrl("http://localhost:8000"))
 
 
 class AppDirectories(BaseAppSettings):
