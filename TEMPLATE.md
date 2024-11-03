@@ -35,5 +35,5 @@ This Application implements the following:
 
 ## Pending features to add to repo
 
-- Async database using SQLAlchemy ORM
-- Authentication (token-based)
+- [x] Async database using SQLAlchemy ORM
+- [ ] Authentication (token-based)
