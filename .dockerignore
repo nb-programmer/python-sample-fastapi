@@ -7,7 +7,7 @@ docker-compose*
 .vscode
 env
 
-docker-scripts/
+scripts/
 examples/
 dev/
 secrets/

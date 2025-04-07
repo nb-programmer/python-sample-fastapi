@@ -8,7 +8,7 @@ RUN apt-get update -y && \
 
 
 ##### Stage 'builder' - Build wheel #####
-FROM base as builder
+FROM base AS builder
 
 ENV POETRY_HOME=/opt/poetry \
     POETRY_NO_INTERACTION=1 \
