@@ -53,4 +53,4 @@ RUN chmod +x ./entrypoint.sh ./dependencies.sh
 
 ENTRYPOINT ["./entrypoint.sh"]
 
-HEALTHCHECK --interval=30s --timeout=30s --start-period=30s --retries=20 CMD curl --include --request GET http://localhost:8000/health || exit 1
+HEALTHCHECK --interval=30s --timeout=30s --start-period=30s --retries=20 CMD curl --include --request GET http://localhost:8000/health/healthcheck || exit 1

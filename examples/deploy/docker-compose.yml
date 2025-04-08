@@ -1,6 +1,6 @@
 services:
   server:
-    image: ghcr.io/nb-programmer/sample-fastapi:latest
+    image: sample-fastapi:latest
 
     command:
       - "--host=0.0.0.0"

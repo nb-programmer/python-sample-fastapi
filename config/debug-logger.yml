@@ -43,6 +43,13 @@ formatters:
     use_colors: false
 
 
+filters:
+  healthcheck_filter:
+    # Filter for the `/health/healthcheck` endpoint.
+    "()": sample_fastapi.app.resources.docker_health.HealthCheckFilter
+    name: "uvicorn.access"
+
+
 handlers:
   # Root logger
   global_console:
@@ -85,6 +92,9 @@ handlers:
   uvicorn_access_console:
     class: logging.StreamHandler
     formatter: uvicorn_access_console_fmt
+    filters:
+      # Filters out annoying healthcheck pings
+      - healthcheck_filter
 
     # Arguments
     stream: ext://sys.stdout
@@ -104,6 +114,9 @@ handlers:
   uvicorn_access_file:
     class: logging.handlers.TimedRotatingFileHandler
     formatter: uvicorn_access_file_fmt
+    filters:
+      # Filters out annoying healthcheck pings
+      - healthcheck_filter
 
     # Arguments
     filename: *uvicorn_access_log_file
