@@ -1,6 +1,5 @@
 import logging
 from contextlib import asynccontextmanager
-from typing import Annotated
 
 from fastapi import FastAPI
 
@@ -32,7 +31,7 @@ async def lifespan(app: FastAPI):
         yield
 
 
-def init_app_db(app: FastAPI, db_settings: Annotated[DBSettings, DBSettings()]):
+def init_app_db(app: FastAPI, db_settings: DBSettings):
     """Initialize database session manager and bind it with the FastAPI application"""
     app.extra[APP_DB_SESSION_MANAGER_KEY] = AsyncDatabaseSessionManager(
         db_settings.database_url,
